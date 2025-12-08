@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Nguyen Van Nam",
+    "math": 6,
+    "physics": 7,
+    "chemistry": 5
+  },
+  {
+    "name": "Nguyen The Anh",
+    "math": 4,
+    "physics": 5,
+    "chemistry": 6
+  },
+  {
+    "name": "Tran Van Binh",
+    "math": 8,
+    "physics": 9,
+    "chemistry": 10
+  }
+]
