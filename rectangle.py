@@ -4,40 +4,59 @@ class Rectangle:
         self.width = width
         self.color = self._standardize_color(color)
 
-        self.chu_vi = self._tinh_chu_vi()
-        self.dien_tich = self._tinh_dien_tich()
-
     def __str__(self) -> str:
-        if self._validate():
+        if self.is_valid():
             return f"{self.chu_vi} {self.dien_tich} {self.color}"
         else:
             return "INVALID"
 
-    def _validate(self) -> bool:
-        if self.height > 0 and self.width > 0:
-            return True
-        else:
-            return False
+    def is_valid(self) -> bool:
+        """Check if the rectangle dimensions are valid."""
+        return self.height > 0 and self.width > 0
 
-    def _tinh_chu_vi(self) -> int:
+    @property
+    def chu_vi(self) -> int:
+        """Calculate perimeter (chu vi) of the rectangle."""
         return (self.height + self.width) * 2
 
-    def _tinh_dien_tich(self) -> int:
+    @property
+    def dien_tich(self) -> int:
+        """Calculate area (dien tich) of the rectangle."""
         return self.height * self.width
 
-    def _standardize_color(self, color: str) -> str:
+    @staticmethod
+    def _standardize_color(color: str) -> str:
+        """Standardize color string by stripping whitespace and capitalizing."""
         return color.strip().capitalize()
 
 
-def main():
-    input_str = input().strip()
+def main() -> None:
+    """Main function to handle rectangle input and output."""
+    try:
+        input_str = input().strip()
 
-    w, h, c, *_ = input_str.split(" ")
+        # Parse input: width, height, color
+        parts = input_str.split()
+        if len(parts) < 3:
+            print("INVALID")
+            return
 
-    h = int(h)
-    w = int(w)
-    rectangle = Rectangle(h, w, c)
-    print(rectangle)
+        w, h, c = parts[0], parts[1], parts[2]
+
+        # Convert to integers and validate
+        try:
+            h = int(h)
+            w = int(w)
+        except ValueError:
+            print("INVALID")
+            return
+
+        rectangle = Rectangle(h, w, c)
+        print(rectangle)
+    except EOFError:
+        pass  # End of input
+    except Exception as e:
+        print("INVALID")
 
 
 if __name__ == "__main__":
